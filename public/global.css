@@ -1,0 +1,48 @@
+/* BOILERPLATE */
+:root {
+  --color-primary: #00a6a6;
+  --color-primary-light: #99dbdb;
+  --color-primary-dark: #00a6a6;
+  --color-primary-dark-2: #008585;
+
+  --color-grey-light-1: #c7c5c7;
+  --color-grey-light-2: #b9b7b9;
+  --color-grey-light-3: #aba9aa;
+
+  --color-grey-dark-1: #514e50;
+  --color-grey-dark-2: #454344;
+  --color-grey-dark-3: #222122;
+
+  --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+
+  --separator-line: 1px solid var(--color-grey-light-2);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 10px/16px = 62.5% --> 1rem = 10px */
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-grey-dark-2);
+  /* background-image: linear-gradient(
+    to right bottom,
+    var(--color-primary),
+    var(--color-primary-dark)
+  ); */
+  /* background-color: var(--color-primary-dark-2); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
