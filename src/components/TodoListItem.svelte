@@ -1,6 +1,6 @@
 <script>
   import Icon from 'svelte-awesome/components/Icon.svelte'
-  import { trash, check } from 'svelte-awesome/icons'
+  import { trash } from 'svelte-awesome/icons'
 
   import { todos } from '../stores/todos.js'
 
@@ -12,8 +12,6 @@
       return currentTodos.filter((todo) => todo.id !== id)
     })
   }
-
-  // $: console.log(`todo.done = ${todo.done} for todo.id = ${todo.id}`)
 
   export let todo
 </script>

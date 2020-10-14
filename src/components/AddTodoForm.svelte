@@ -12,7 +12,6 @@
         return [todo, ...currentTodos]
       })
       title = ''
-      console.log('Form has being submitted with value: ', todo)
     }
   }
 </script>
