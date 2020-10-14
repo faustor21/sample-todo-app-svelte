@@ -48,6 +48,10 @@
     align-content: center;
     align-items: center;
   }
+
+  .strike-through {
+    text-decoration: line-through;
+  }
 </style>
 
 <div class="list-item">
@@ -58,7 +62,7 @@
       on:change={() => todos.update((currentTodos) => currentTodos)} />
   </span>
   <div class="title">
-    <h3>{todo.title}</h3>
+    <h3 class:strike-through={todo.done === true}>{todo.title}</h3>
   </div>
   <Button type="secondary" on:click={() => removeTodo(todo.id)}>
     <Icon data={trash} />

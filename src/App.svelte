@@ -7,7 +7,6 @@
   import Tabs from './components/shared/Tabs.svelte'
   import Pagination from './components/shared/Pagination.svelte'
   import { todos } from './stores/todos'
-  import { filter } from 'svelte-awesome/icons'
 
   const availableTabs = ['Pending', 'Done']
   let currentTab = availableTabs[0]
@@ -36,21 +35,13 @@
 
   onMount(() => {
     unsubcribe = todos.subscribe((currentTodos) => {
-      // Avoid devision by zero
-      if (currentTodos.length > 0) {
-        numPages = Math.ceil(currentTodos.length / maxTodosPerPage)
-        if (numPages > 0) pages = []
-        for (let n = 1; n <= numPages; n++) {
-          pages = [...pages, n]
-        }
-      } else {
-        numPages = 1
-        currentPage = 1
-      }
+      // These are all the todos filtered by filterByDone
+      let totalTodos = 0
 
       // index starts at zero like in a regular array
       todosToBeDisplayed = currentTodos.reduce((acc, cv, index) => {
         if (cv.done === filterByDone) {
+          totalTodos++
           if (currentPage === 1) {
             if (acc.length < maxTodosPerPage) return [...acc, cv]
           }
@@ -64,6 +55,19 @@
         }
         return acc
       }, [])
+
+      // Avoid devision by zero
+      if (totalTodos > 0) {
+        numPages = Math.ceil(totalTodos / maxTodosPerPage)
+        // Reset the pages array
+        if (numPages > 0) pages = []
+        for (let n = 1; n <= numPages; n++) {
+          pages = [...pages, n]
+        }
+      } else {
+        numPages = 1
+        currentPage = 1
+      }
     })
   })
 
@@ -78,6 +82,13 @@
     background-color: var(--color-grey-light-1);
     box-shadow: var(--shadow-dark);
   }
+
+  .main-body {
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 </style>
 
 <main>
@@ -86,8 +97,8 @@
   {#if filterByDone === false}
     <AddTodoForm />
   {/if}
-  <TodoList todos={todosToBeDisplayed} done={filterByDone} />
-  {#if numPages > 0}
+  <div class="main-body">
+    <TodoList todos={todosToBeDisplayed} />
     <Pagination {currentPage} {pages} on:pageChange={handlePageChange} />
-  {/if}
+  </div>
 </main>
